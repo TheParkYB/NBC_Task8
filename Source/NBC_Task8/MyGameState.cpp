@@ -4,7 +4,6 @@
 #include "MainUserWidget.h"
 #include "MyGameInstance.h"
 #include "NBC_Task8Character.h"
-#include "Kismet/GameplayStatics.h"
 
 void AMyGameState::BeginPlay()
 {
@@ -72,7 +71,8 @@ void AMyGameState::NextWave()
 	AItemManager::GetInstance()->DeleteAllItems();
 
 	//동전 아이템 생성
-	AItemManager::GetInstance()->SpawnItems(1, START_COIN_COUNT);
+	int coinCount = currentWave * EXTRA_COIN_MEASURE + START_COIN_COUNT;
+	AItemManager::GetInstance()->SpawnItems(1, coinCount);
 
 	//일반 웨이브 알림
 	if (currentWave == 1)

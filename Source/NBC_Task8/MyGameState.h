@@ -28,7 +28,10 @@ private:
 	void TimeLimitCounting();
 	
 	//웨이브 시작시 생성하는 동전 아이템 개수
-	const int START_COIN_COUNT = 15;
+	const int START_COIN_COUNT = 12;
+
+	//웨이브 * 이 변수 만큼 추가 코인 생성
+	const int EXTRA_COIN_MEASURE = 3;
 
 	//2번째 웨이브에서 생성하는 해골, 구급약 아이템 개수
 	const int SUB_ITEM_COUNT = 5;
