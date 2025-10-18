@@ -149,8 +149,8 @@ void AItemManager::SpawnItems(int itemID, int spawnCount, bool addToAllItems)
 		FVector spawnPoint;
 		do
 		{
-			float x = FMath::RandRange(-MAP_SIZE_HALF, MAP_SIZE_HALF);
-			float y = FMath::RandRange(-MAP_SIZE_HALF, MAP_SIZE_HALF);
+			float x = FMath::RandRange(-halfLengthX, halfLengthX);
+			float y = FMath::RandRange(-halfLengthY, halfLengthY);
 			spawnPoint = FVector(x, y, ITEM_FROM_FLOOR);
 		} while (FVector::DistSquared(spawnPoint, curCharPos) < ITEM_FROM_PLAYER);
 

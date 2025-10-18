@@ -42,12 +42,18 @@ private:
 	UPROPERTY(EditInstanceOnly, Category = "Item Actor", meta = (AllowPrivateAccess = true))
 	TArray<TSubclassOf<AItemActor>> itemActors;
 
+	//맵의 X방향 절반 길이
+	UPROPERTY(EditInstanceOnly, Category = "Item Actor", meta = (AllowPrivateAccess = true))
+	float halfLengthX;
+
+	//맵의 Y방향 절반 길이
+	UPROPERTY(EditInstanceOnly, Category = "Item Actor", meta = (AllowPrivateAccess = true))
+	float halfLengthY;
+
 	//캐릭터 액터
 	UPROPERTY()
 	class ANBC_Task8Character* playerCharacter = nullptr;
-
-	//맵 크기 (한 변의 절반)
-	const float MAP_SIZE_HALF = 2000.0f;
+	
 	//바닥과 아이템 사이의 거리
 	const float ITEM_FROM_FLOOR = 100.0f;
 	//아이템 생성시 아이템과 캐릭터의 최소 거리 (제곱 합)
