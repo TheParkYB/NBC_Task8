@@ -85,6 +85,9 @@ void ANBC_Task8Character::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ANBC_Task8Character::Look);
+
+		//일시정지
+		EnhancedInputComponent->BindAction(pauseAction, ETriggerEvent::Triggered, this, &ANBC_Task8Character::Pause);
 	}
 	else
 	{
@@ -133,6 +136,16 @@ void ANBC_Task8Character::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void ANBC_Task8Character::Pause(const FInputActionValue& value)
+{
+	APlayerController* controller = Cast<APlayerController>(GetController());
+	if (controller == nullptr)
+		return;
+
+	//일시정지 여부 변경
+	controller->SetPause(!controller->IsPaused());
 }
 
 void ANBC_Task8Character::SpeedDebuff()

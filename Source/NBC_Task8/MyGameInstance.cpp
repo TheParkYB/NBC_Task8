@@ -65,3 +65,10 @@ void UMyGameInstance::GameOver()
 	stage = 0;
 	UGameplayStatics::OpenLevel(GetWorld(), mapNames[stage]);
 }
+
+void UMyGameInstance::StopGame()
+{
+	gameResult = EGameResult::None;
+	stage = 0;
+	UGameplayStatics::OpenLevel(GetWorld(), mapNames[stage]);
+}

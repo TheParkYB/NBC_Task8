@@ -13,6 +13,9 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	//일시정지
+	virtual bool SetPause(bool bPause, FCanUnpause CanUnpauseDelegate = FCanUnpause()) override;
+	
 	//위젯 반환
 	class UMainUserWidget* GetUserWidget();
 

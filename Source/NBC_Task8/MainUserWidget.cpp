@@ -1,5 +1,20 @@
 #include "MainUserWidget.h"
+#include "MyGameInstance.h"
+#include "Components/Button.h"
 #include "Components/TextBlock.h"
+
+void UMainUserWidget::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	//처음에는 메뉴 블필요
+	pauseMenu->SetVisibility(ESlateVisibility::Hidden);
+
+	//버튼 클릭 이벤트
+	pauseButton->OnClicked.AddDynamic(this, &UMainUserWidget::OnClickPauseButton);
+	resumeButton->OnClicked.AddDynamic(this, &UMainUserWidget::OnClickResumeButton);
+	quitButton->OnClicked.AddDynamic(this, &UMainUserWidget::OnClickQuitButton);
+}
 
 void UMainUserWidget::SetWave(int wave)
 {
@@ -67,4 +82,25 @@ void UMainUserWidget::ShowBottomMessage(FString message, FColor textColor)
 
 	//연출
 	PlayAnimation(bottomMessage);
+}
+
+void UMainUserWidget::SetActivePauseMenu(bool pause)
+{
+	pauseMenu->SetVisibility(pause ? ESlateVisibility::Visible : ESlateVisibility::Hidden);
+}
+
+void UMainUserWidget::OnClickPauseButton()
+{
+	GetWorld()->GetFirstPlayerController()->SetPause(true);
+}
+
+void UMainUserWidget::OnClickResumeButton()
+{
+	GetWorld()->GetFirstPlayerController()->SetPause(false);
+}
+
+void UMainUserWidget::OnClickQuitButton()
+{
+	UMyGameInstance* myGameInstance = Cast<UMyGameInstance>(GetGameInstance());
+	myGameInstance->StopGame();
 }

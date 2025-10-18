@@ -37,6 +37,9 @@ public:
 	//게임 오버
 	void GameOver();
 
+	//게임 중단
+	void StopGame();
+
 private:
 	//점수
 	int score;

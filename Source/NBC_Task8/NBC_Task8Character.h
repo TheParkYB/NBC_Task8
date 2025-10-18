@@ -44,19 +44,24 @@ class ANBC_Task8Character : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	//일시정지 입력 액션
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* pauseAction;
+
 public:
 	ANBC_Task8Character();
 	
 
 protected:
-
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 			
-
+	//일시정지 입력으로 호출되는 함수
+	void Pause(const FInputActionValue& value);
+	
 protected:
 
 	virtual void NotifyControllerChanged() override;

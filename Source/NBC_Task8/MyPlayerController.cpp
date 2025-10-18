@@ -17,6 +17,16 @@ void AMyPlayerController::BeginPlay()
 	SetShowMouseCursor(false);
 }
 
+bool AMyPlayerController::SetPause(bool bPause, FCanUnpause CanUnpauseDelegate)
+{
+	//마우스 커서
+	SetShowMouseCursor(bPause);
+	//메뉴
+	mainUserWidget->SetActivePauseMenu(bPause);
+	
+	return Super::SetPause(bPause,CanUnpauseDelegate);
+}
+
 UMainUserWidget* AMyPlayerController::GetUserWidget()
 {
 	return mainUserWidget;
