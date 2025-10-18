@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "MyGameInstance.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -88,6 +89,9 @@ void ANBC_Task8Character::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 		//일시정지
 		EnhancedInputComponent->BindAction(pauseAction, ETriggerEvent::Triggered, this, &ANBC_Task8Character::Pause);
+		
+		//스테이지 스킵
+		EnhancedInputComponent->BindAction(stageSkipAction, ETriggerEvent::Triggered, this, &ANBC_Task8Character::StageSkip);
 	}
 	else
 	{
@@ -148,9 +152,22 @@ void ANBC_Task8Character::Pause(const FInputActionValue& value)
 	controller->SetPause(!controller->IsPaused());
 }
 
+void ANBC_Task8Character::StageSkip(const FInputActionValue& value)
+{
+#if UE_EDITOR
+	//즉시 다음 스테이지로
+	Cast<UMyGameInstance>(GetGameInstance())->GoToNextStage();
+#endif
+}
+
 void ANBC_Task8Character::SpeedDebuff()
 {
-	GetCharacterMovement()->MaxWalkSpeed = DEBUFF_MOVE_SPEED;
+	//절반 감소
+	float speed = GetCharacterMovement()->MaxWalkSpeed * 0.5f;
+	if (speed < MIN_MOVE_SPEED)
+		speed = MIN_MOVE_SPEED;
+	
+	GetCharacterMovement()->MaxWalkSpeed = speed;
 }
 
 void ANBC_Task8Character::ReverseMovingDebuff()

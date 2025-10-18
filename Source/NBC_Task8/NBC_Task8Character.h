@@ -48,6 +48,10 @@ class ANBC_Task8Character : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* pauseAction;
 
+	//스테이지 스킵 액션 (에디터용)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* stageSkipAction;
+
 public:
 	ANBC_Task8Character();
 	
@@ -61,6 +65,9 @@ protected:
 			
 	//일시정지 입력으로 호출되는 함수
 	void Pause(const FInputActionValue& value);
+
+	//스테이지 스팁 입력으로 호출되는 함수
+	void StageSkip(const FInputActionValue& value);
 	
 protected:
 
@@ -98,8 +105,8 @@ private:
 	//기본 제동력
 	const float DEFAULT_MOVE_DECELERATION = 3000.0f;
 	
-	//디버프시 이동 속도
-	const float DEBUFF_MOVE_SPEED = 300.0f;
+	//디버프애 의한 최저 속도
+	const float MIN_MOVE_SPEED = 300.0f;
 
 	//얼음 바닥의 마찰값
 	const float ICE_MOVE_FRICTION = 1.0f;
